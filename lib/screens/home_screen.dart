@@ -9,6 +9,8 @@ import 'package:alarm_clock/services/navTargets.dart';
 import 'package:alarm_clock/services/navigation.dart';
 import 'package:alarm_clock/services/site_nav.dart';
 
+import 'categories_screen.dart';
+
 class HomeScreen extends StatefulWidget {
   HomeScreen({super.key});
 
@@ -53,7 +55,8 @@ class _HomeScreenState extends State<HomeScreen> {
           alignment: Alignment.center,
           child: TextButton.icon(
             onPressed: () {
-              GetIt.I<Navigation>().navigate(NavTargets.playlists);
+              // GetIt.I<Navigation>().navigate(NavTargets.playlists);
+              Navigator.of(context).push(MaterialPageRoute(builder: (context) => CategoriesScreen()));
             },
             label: Text('Lets start tomorrow differently'),
           ),
