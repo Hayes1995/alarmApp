@@ -1,3 +1,4 @@
+import 'package:alarm_clock/screens/alarm_screen.dart';
 import 'package:alarm_clock/screens/categories_screen.dart';
 import 'package:alarm_clock/screens/home_screen.dart';
 import 'package:alarm_clock/services/navTargets.dart';
@@ -21,6 +22,8 @@ class SiteContent extends StatelessWidget {
             return HomeScreen();
           case NavTargets.playlists:
             return CategoriesScreen();
+          case NavTargets.alarm:
+            return DatePickerApp();
           default:
             return const Placeholder();
         }

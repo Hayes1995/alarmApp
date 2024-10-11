@@ -6,7 +6,7 @@ const kbackgroundColor = Color.fromARGB(255, 20, 146, 184);
 
 final appTheme = ThemeData(
   colorScheme: ColorScheme.fromSeed(
-    seedColor: kprimaryColor,
+    seedColor: const Color.fromARGB(255, 20, 142, 224),
   ),
   appBarTheme: const AppBarTheme(
     backgroundColor: kbackgroundColor,

@@ -1,13 +1,9 @@
-import 'package:alarm_clock/services/navTargets.dart';
-import 'package:alarm_clock/services/navigation.dart';
+import 'package:alarm_clock/screens/alarm_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:alarm_clock/constants/themes.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:alarm_clock/widgets/main_drawer.dart';
-import 'package:get_it/get_it.dart';
-import 'package:alarm_clock/services/navTargets.dart';
-import 'package:alarm_clock/services/navigation.dart';
-import 'package:alarm_clock/services/site_nav.dart';
+import 'categories_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   HomeScreen({super.key});
@@ -37,7 +33,10 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.of(context).push(
+                  MaterialPageRoute(builder: (context) => DatePickerApp()));
+            },
             icon: Icon(
               Icons.alarm_add,
               color: ksecondaryColor,
@@ -53,7 +52,8 @@ class _HomeScreenState extends State<HomeScreen> {
           alignment: Alignment.center,
           child: TextButton.icon(
             onPressed: () {
-              GetIt.I<Navigation>().navigate(NavTargets.playlists);
+              Navigator.of(context).push(
+                  MaterialPageRoute(builder: (context) => CategoriesScreen()));
             },
             label: Text('Lets start tomorrow differently'),
           ),
