@@ -1,7 +1,7 @@
 import 'package:alarm_clock/constants/themes.dart';
+import 'package:alarm_clock/screens/alarm_screen.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:alarm_clock/screens/home_screen.dart';
-import 'package:alarm_clock/screens/categories_screen.dart';
 
 void main() {
   runApp(MyApp());
@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
       title: 'A New Dawn',
       theme: appTheme,
       debugShowCheckedModeBanner: false,
-      home: HomeScreen(),
+      home: DatePickerApp(),
     );
   }
 }

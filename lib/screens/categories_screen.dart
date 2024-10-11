@@ -1,4 +1,5 @@
 import 'package:alarm_clock/widgets/category_grid_item.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:alarm_clock/data/dummy_data.dart';
 
@@ -28,3 +29,16 @@ class CategoriesScreen extends StatelessWidget {
     );
   }
 }
+
+//     return CupertinoPageScaffold(
+//       child: Container(child: 
+      
+//       CupertinoNavigationBar(
+//         middle: Text('Select your playlist'),
+//       ),
+//       color: Colors.black,
+
+//       ),
+//     );
+//   }
+// }

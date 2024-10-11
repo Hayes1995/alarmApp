@@ -1,3 +1,4 @@
+import 'package:alarm_clock/screens/alarm_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:alarm_clock/models/category.dart';
 
@@ -10,8 +11,10 @@ class CategoryGridItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       highlightColor: Colors.red,
-      onTap: () {},
-      onSecondaryTap: () {},
+      onTap: () {
+        Navigator.of(context)
+            .push(MaterialPageRoute(builder: (context) => DatePickerApp()));
+      },
       splashColor: Theme.of(context).primaryColor,
       borderRadius: BorderRadius.circular(16),
       child: Container(

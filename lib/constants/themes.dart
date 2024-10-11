@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 const kprimaryColor = Color.fromARGB(255, 214, 198, 23);
@@ -28,3 +29,8 @@ final appTheme = ThemeData(
     ),
   ),
 );
+
+// final appTheme = CupertinoThemeData(
+//   primaryColor: kprimaryColor,
+//   primaryContrastingColor: ksecondaryColor,
+// );

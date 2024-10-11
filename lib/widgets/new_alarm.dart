@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class NewAlarm extends StatefulWidget {
@@ -12,6 +13,6 @@ class NewAlarm extends StatefulWidget {
 class _NewAlarmState extends State<NewAlarm> {
   @override
   Widget build(BuildContext context) {
-    throw UnimplementedError();
+    return Text('lol');
   }
 }
