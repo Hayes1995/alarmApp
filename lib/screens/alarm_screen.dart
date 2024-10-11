@@ -3,6 +3,7 @@ import 'package:alarm_clock/screens/categories_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:omni_datetime_picker/omni_datetime_picker.dart';
+import 'package:intl/intl.dart';
 
 class DatePickerApp extends StatefulWidget {
   DatePickerApp({super.key});
@@ -13,10 +14,21 @@ class DatePickerApp extends StatefulWidget {
 }
 
 class _DatePickerAppState extends State<DatePickerApp> {
-  var _enteredDate = int;
+  DateTime? _selectedDate;
 
-  void _saveDateInput(int inputValue) {
-    _enteredDate = inputValue as Type;
+  // void _saveDateInput(String inputValue) {
+  //   _enteredDate = inputValue;
+  // }
+
+  void _presentDate() async {
+    final now = DateTime.now();
+    final pickedDate = await showOmniDateTimePicker(
+      context: context,
+      initialDate: now,
+    );
+    setState(() {
+      _selectedDate = pickedDate;
+    });
   }
 
   @override
@@ -28,22 +40,40 @@ class _DatePickerAppState extends State<DatePickerApp> {
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisSize: MainAxisSize.min,
           children: [
-            Text('$_enteredDate'),
             ElevatedButton(
-              onPressed: () {
-                showOmniDateTimePicker(
-                  context: context,
-                  initialDate: DateTime.now(),
-                );
+              onPressed: () async {
+                await showOmniDateTimePicker(context: context);
+                _presentDate();
               },
               child: const Text('Show DateTime Picker'),
             ),
+            SizedBox(
+              height: 40,
+            ),
+            SizedBox(
+              child: Text(
+                _selectedDate == null ? 'No date selected' : '$_selectedDate',
+                style: TextStyle(color: Colors.black),
+              ),
+            )
           ],
         ),
       ),
     );
   }
 }
+
+
+
+
+
+
+
+
+
+
+
+
 
 // return const CupertinoApp(
 //   theme: CupertinoThemeData(brightness: Brightness.light),
