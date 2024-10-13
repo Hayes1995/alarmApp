@@ -24,7 +24,6 @@ class _DatePickerAppState extends State<DatePickerApp> {
     final now = DateTime.now();
     final pickedDate = await showOmniDateTimePicker(
       context: context,
-      initialDate: now,
     );
     setState(() {
       _selectedDate = pickedDate;
