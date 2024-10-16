@@ -5,6 +5,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:omni_datetime_picker/omni_datetime_picker.dart';
 import 'package:intl/intl.dart';
 
+final formatter = DateFormat();
+
 class DatePickerApp extends StatefulWidget {
   DatePickerApp({super.key});
   @override
@@ -15,13 +17,9 @@ class DatePickerApp extends StatefulWidget {
 
 class _DatePickerAppState extends State<DatePickerApp> {
   DateTime? _selectedDate;
-
-  // void _saveDateInput(String inputValue) {
-  //   _enteredDate = inputValue;
-  // }
+  String? pickedPlaylist;
 
   void _presentDate() async {
-    final now = DateTime.now();
     final pickedDate = await showOmniDateTimePicker(
       context: context,
     );
@@ -40,10 +38,7 @@ class _DatePickerAppState extends State<DatePickerApp> {
           mainAxisSize: MainAxisSize.min,
           children: [
             ElevatedButton(
-              onPressed: () async {
-                await showOmniDateTimePicker(context: context);
-                _presentDate();
-              },
+              onPressed: _presentDate,
               child: const Text('Show DateTime Picker'),
             ),
             SizedBox(
@@ -51,10 +46,20 @@ class _DatePickerAppState extends State<DatePickerApp> {
             ),
             SizedBox(
               child: Text(
-                _selectedDate == null ? 'No date selected' : '$_selectedDate',
+                _selectedDate == null
+                    ? 'No date selected'
+                    : formatter.format(_selectedDate!),
                 style: TextStyle(color: Colors.black),
               ),
-            )
+            ),
+            SizedBox(
+              height: 14,
+            ),
+            SizedBox(
+              child: Text(pickedPlaylist == null
+                  ? 'No playlist selected'
+                  : '$pickedPlaylist'),
+            ),
           ],
         ),
       ),

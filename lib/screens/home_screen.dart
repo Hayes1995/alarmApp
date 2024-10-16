@@ -40,7 +40,10 @@ class _HomeScreenState extends State<HomeScreen> {
           IconButton(
             onPressed: () {
               Navigator.of(context).push(
-                  MaterialPageRoute(builder: (context) => DatePickerApp()));
+                MaterialPageRoute(
+                  builder: (context) => DatePickerApp(),
+                ),
+              );
             },
             icon: Icon(
               Icons.alarm_add,
@@ -58,7 +61,10 @@ class _HomeScreenState extends State<HomeScreen> {
           child: TextButton.icon(
             onPressed: () {
               Navigator.of(context).push(
-                  MaterialPageRoute(builder: (context) => CategoriesScreen()));
+                MaterialPageRoute(
+                  builder: (context) => CategoriesScreen(),
+                ),
+              );
             },
             label: Text(
               'Lets start tomorrow differently',
