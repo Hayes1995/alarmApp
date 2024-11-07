@@ -23,7 +23,7 @@ class SiteContent extends StatelessWidget {
           case NavTargets.playlists:
             return CategoriesScreen();
           case NavTargets.alarm:
-            return DatePickerApp();
+            return DatePickerApp('');
           default:
             return const Placeholder();
         }

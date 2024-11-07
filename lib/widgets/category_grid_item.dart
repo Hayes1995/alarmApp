@@ -13,19 +13,13 @@ class CategoryGridItem extends StatefulWidget {
 }
 
 class _CategoryGridItemState extends State<CategoryGridItem> {
-  Future<String> cubed(String) {
-    return Future(() => Text(''));
-  }
-
-  void _selectedPlaylist() async {
-    final pickedPlaylist = await cubed();
-
+  
+  void _selectedPlaylist() {
     Navigator.of(context).push(
       MaterialPageRoute(
-        builder: (context) => DatePickerApp(),
+        builder: (context) => DatePickerApp(widget.category.title),
       ),
     );
-    setState(() {});
   }
 
   @override

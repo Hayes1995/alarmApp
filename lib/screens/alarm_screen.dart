@@ -8,7 +8,9 @@ import 'package:intl/intl.dart';
 final formatter = DateFormat();
 
 class DatePickerApp extends StatefulWidget {
-  DatePickerApp({super.key});
+  DatePickerApp(this.title, {super.key});
+
+  final String title;
   @override
   State<DatePickerApp> createState() {
     return _DatePickerAppState();
@@ -17,7 +19,6 @@ class DatePickerApp extends StatefulWidget {
 
 class _DatePickerAppState extends State<DatePickerApp> {
   DateTime? _selectedDate;
-  String? pickedPlaylist;
 
   void _presentDate() async {
     final pickedDate = await showOmniDateTimePicker(
@@ -56,9 +57,9 @@ class _DatePickerAppState extends State<DatePickerApp> {
               height: 14,
             ),
             SizedBox(
-              child: Text(pickedPlaylist == null
+              child: Text(widget.title == ''
                   ? 'No playlist selected'
-                  : '$pickedPlaylist'),
+                  : '${widget.title}'),
             ),
           ],
         ),
