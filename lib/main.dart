@@ -1,5 +1,4 @@
 import 'package:alarm_clock/constants/themes.dart';
-import 'package:alarm_clock/screens/alarm_screen.dart';
 import 'package:alarm_clock/screens/home_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
