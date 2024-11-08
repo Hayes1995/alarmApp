@@ -1,19 +1,22 @@
+import 'package:alarm_clock/provider/alarm_provider.dart';
 import 'package:alarm_clock/widgets/analog_clock.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
-
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../models/alarm.dart';
 
-class AlarmRow extends StatefulWidget {
+class AlarmRow extends ConsumerStatefulWidget {
   AlarmRow({required this.alarm, super.key});
 
   final Alarm alarm;
 
   @override
-  State<AlarmRow> createState() => _AlarmRowState();
+  ConsumerState<AlarmRow> createState() => _AlarmRowState();
 }
 
-class _AlarmRowState extends State<AlarmRow> {
+late Alarm alarm;
+
+class _AlarmRowState extends ConsumerState<AlarmRow> {
   @override
   Widget build(BuildContext context) {
     String alarm_text;
@@ -23,7 +26,7 @@ class _AlarmRowState extends State<AlarmRow> {
       case >= 12:
         alarm_text = "${alarmTime.hour - 12}:${minute} PM";
       case == 12:
-        alarm_text = "$alarmTime.hour - 12}:${minute} PM";
+        alarm_text = "${alarmTime.hour}:${minute} PM";
       case == 0:
         alarm_text = "${alarmTime.hour + 12}:${minute} AM";
       default:
@@ -47,7 +50,7 @@ class _AlarmRowState extends State<AlarmRow> {
       endActionPane: ActionPane(
         motion: ScrollMotion(),
         dismissible: DismissiblePane(onDismissed: () {}),
-        children: const [
+        children: [
           SlidableAction(
             onPressed: doNothing,
             backgroundColor: Color(0xFFFE4A49),
@@ -74,7 +77,7 @@ class _AlarmRowState extends State<AlarmRow> {
           );
           if (timeOfDay != null) {
             setState(() {
-              widget.alarm.alarmTime = timeOfDay;
+              ref.read(alarmProvider.notifier).toggleAlarm(alarm);
             });
           }
         },
