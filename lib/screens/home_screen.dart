@@ -4,6 +4,8 @@ import 'package:alarm_clock/constants/themes.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 
+import '../models/alarm.dart';
+
 final formatter = DateFormat("h:mm a");
 
 class HomeScreen extends StatefulWidget {
@@ -16,39 +18,10 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  TimeOfDay? _selectedTime;
-
-  void _presentDate() async {
-    final TimeOfDay? timeOfDay = await showTimePicker(
-      initialTime: TimeOfDay.now(),
-      context: context,
-      confirmText: 'Save Alarm',
-      initialEntryMode: TimePickerEntryMode.dial,
-    );
-    if (timeOfDay != null) {
-      String selTime =
-          timeOfDay.hour.toString() + ':' + timeOfDay.minute.toString() + ':00';
-      (
-        DateFormat.jm().format(
-          DateFormat("hh:mm:ss").parse(selTime),
-        ),
-      );
-      setState(
-        () {
-          _selectedTime = timeOfDay;
-        },
-      );
-    }
-  }
+  List<Alarm> alarms = [];
 
   @override
   Widget build(BuildContext context) {
-    String holdingText;
-    if (_selectedTime == null) {
-      holdingText = 'Add alarm';
-    } else {
-      holdingText = "${_selectedTime!.hour}:${_selectedTime!.minute}";
-    }
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -68,13 +41,25 @@ class _HomeScreenState extends State<HomeScreen> {
         actions: [
           IconButton(
             tooltip: 'Add Alarm',
-            onPressed: _presentDate,
-            icon: Icon(
+            onPressed: () async {
+              final TimeOfDay? timeOfDay = await showTimePicker(
+                initialTime: TimeOfDay.now(),
+                context: context,
+                confirmText: 'Save Alarm',
+                initialEntryMode: TimePickerEntryMode.dial,
+              );
+              if (timeOfDay != null) {
+                setState(() {
+                  alarms.add(Alarm(timeOfDay));
+                });
+              }
+            },
+            icon: const Icon(
               Icons.alarm_add,
               color: ksecondaryColor,
             ),
           ),
-          SizedBox(
+          const SizedBox(
             width: 24,
           ),
         ],
@@ -83,12 +68,8 @@ class _HomeScreenState extends State<HomeScreen> {
       body: ListView(
         padding: EdgeInsets.all(10),
         children: [
-          AlarmRow(
-            selectedTime: holdingText,
-          ),
-          AlarmRow(
-            selectedTime: holdingText,
-          )
+          for (Alarm alarm in alarms) AlarmRow(alarm: alarm),
+          alarms.isEmpty ? const SizedBox(height: 200, child: Center(child: Text('No Alarms'))) : Container(),
         ],
       ),
     );
