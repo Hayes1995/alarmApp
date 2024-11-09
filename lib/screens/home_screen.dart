@@ -20,11 +20,12 @@ class HomeScreen extends ConsumerStatefulWidget {
 
 class _HomeScreenState extends ConsumerState<HomeScreen> {
   // List<Alarm> alarms = [];
-  late Alarm alarm;
+  // late Alarm alarm;
 
   @override
   Widget build(BuildContext context) {
     var alarms = ref.watch(alarmProvider);
+    alarms.sort((a, b) => a.alarmTime.hour * 60 + a.alarmTime.minute - b.alarmTime.hour * 60 + b.alarmTime.minute);
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -53,7 +54,8 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
               );
               if (timeOfDay != null) {
                 setState(() {
-                  ref.read(alarmProvider.notifier).toggleAlarm(alarm);
+                  var alarm = Alarm(timeOfDay);
+                  ref.read(alarmProvider.notifier).addAlarm(alarm);
                 });
               }
             },
