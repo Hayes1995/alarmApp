@@ -10,7 +10,7 @@ import '../models/alarm.dart';
 final formatter = DateFormat("h:mm a");
 
 class HomeScreen extends ConsumerStatefulWidget {
-  HomeScreen({
+  const HomeScreen({
     super.key,
   });
 
@@ -19,12 +19,9 @@ class HomeScreen extends ConsumerStatefulWidget {
 }
 
 class _HomeScreenState extends ConsumerState<HomeScreen> {
-  // List<Alarm> alarms = [];
-  // late Alarm alarm;
-
   @override
   Widget build(BuildContext context) {
-    var alarms = ref.watch(alarmProvider);
+    var alarms = ref.watch(alarmsProvider);
     alarms.sort((a, b) => a.alarmTime.hour * 60 + a.alarmTime.minute - b.alarmTime.hour * 60 + b.alarmTime.minute);
     return Scaffold(
       appBar: AppBar(
@@ -53,10 +50,8 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                 initialEntryMode: TimePickerEntryMode.dial,
               );
               if (timeOfDay != null) {
-                setState(() {
-                  var alarm = Alarm(timeOfDay);
-                  ref.read(alarmProvider.notifier).addAlarm(alarm);
-                });
+                var alarm = Alarm(timeOfDay);
+                ref.read(alarmsProvider.notifier).addAlarm(alarm);
               }
             },
             icon: const Icon(
@@ -71,7 +66,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
       ),
       backgroundColor: appTheme.primaryColorLight,
       body: ListView(
-        padding: EdgeInsets.all(10),
+        padding: const EdgeInsets.all(10),
         children: [
           for (Alarm alarm in alarms) AlarmRow(alarm: alarm),
           alarms.isEmpty
